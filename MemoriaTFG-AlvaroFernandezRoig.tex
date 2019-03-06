@@ -24,7 +24,7 @@
 \usepackage{times}
 \usepackage[latin1]{inputenc}
 \usepackage[spanish]{babel} % Comenta esta línea si tu memoria es en inglés
-\usepackage{url}
+\usepackage[hyphens]{url}
 %\usepackage[dvipdfm]{graphicx}
 \usepackage{graphicx}
 \usepackage{float}  %% H para posicionar figuras
@@ -75,7 +75,7 @@ Trabajo Fin de Grado
 \vspace{2.5cm}
 
 \LARGE
-DESARROLLO Y DESPLIEGUE DE APLICACIONES EN EL ÁMBITO EDUCATIVO (E-LEARNING, M-LEARNING, ETC.)
+TORNEOS DE DR. SCRATCH
 
 \vspace{4cm}
 
@@ -103,7 +103,7 @@ Tutor : Dr. Gregorio Robles
 
 \vspace{1cm}
 \large
-Desarrollo y Despliegue de Aplicaciones en el Ámbito Educativo (E-Learning, M-Learning, etc.)
+Torneos de Dr. Scratch
 
 \vspace{1cm}
 \large
@@ -224,73 +224,15 @@ just before submitting.
 \label{sec:intro} % etiqueta para poder referenciar luego en el texto con ~\ref{sec:intro}
 \pagenumbering{arabic} % para empezar la numeración de página con números
 
-En este capítulo se introduce el proyeto. Debería tener información general sobre el mismo, dando la información sobre el contexto en el que se ha desarrollado.
+El siguiente trabajo consta de la realización de un módulo independiente para la aplicación Dr. Scratch. Se trata del módulo de torneos de Dr. Scratch, que permitirá a los docentes la creación de torneos y la participación en ellos de sus alumnos.
 
-No te olvides de echarle un ojo a la página con los cinco errores de escritura más frecuentes\footnote{\url{http://www.tallerdeescritores.com/errores-de-escritura-frecuentes}}.
+\section{Contexto}
+\label{sec:contexto}
 
-Aconsejo a todo el mundo que mire y se inspire en memorias pasadas. Las mías están todas almacenadas en mi web del GSyC\footnote{\url{https://gsyc.urjc.es/~grex/pfcs/}}.
+Dr. Scratch es una aplicación web que permite la evaluación de proyectos realizados a través de la herramienta Scratch. A través del análisis de los proyectos, Dr. Scratch puntúa en una escala de cero a tres una serie de parámetros relacionados con el pensamiento computacional, como el paralelismo o la abstracción, e identifica posibles errores en la realización de los proyectos, como duplicidades o código muerto. 
 
-\section{Sección}
-\label{sec:seccion}
-
-Esto es una sección, que es una estructura menor que un capítulo. 
-
-Por cierto, a veces me comentáis que no os compila por las tildes.
-Eso es un problema de codificación.
-Cambiad de ``UTF-8'' a ``ISO-Latin-1'' (o vicecersa) y funcionará.
-
-\subsection{Estilo}
-\label{subsec:estilo}
-
-Recomiendo leer los consejos prácticos sobre LaTeX de Diomidos 
-Spinellis\footnote{\url{https://github.com/dspinellis/latex-advice}}.
-
-Sobre el uso de las comas\footnote{\url{http://narrativabreve.com/2015/02/opiniones-de-un-corrector-de-estilo-11-recetas-para-escribir-correctamente-la-coma.html}}
-
-A continuación, viene una figura, la Figura~\ref{figura:foro_hilos}. 
-Observarás que el texto dentro del a referencia es el identificador de la figura (que se corresponden con el ``label'' dentro de la misma). 
-También habrás tomado nota de cómo se ponen las ``comillas dobles'' para que se muestren correctamente. 
-Volviendo a las referencias, nota que al compilar, la primera vez se crea un diccionario con las referencias, y en la segunda compilación se ``rellenan'' estas referencias. 
-Por eso hay que compilar dos veces.
-
- \begin{figure}
-    \centering
-    \includegraphics[bb=0 0 800 600, width=12cm, keepaspectratio]{img/foro1}
-    \caption{Página con enlaces a hilos}
-    \label{figura:foro_hilos}
- \end{figure}
-
-{\footnotesize
-\begin{verbatim}
-    From gaurav at gold-solutions.co.uk  Fri Jan 14 14:51:11 2005
-    From: gaurav at gold-solutions.co.uk (gaurav_gold)
-    Date: Fri Jan 14 19:25:51 2005
-    Subject: [Mailman-Users] mailman issues
-    Message-ID: <003c01c4fa40$1d99b4c0$94592252@gaurav7klgnyif>
-
-    Dear Sir/Madam,
-    How can people reply to the mailing list?  How do i turn off
-    this feature? How can i also enable a feature where if someone
-    replies the newsletter the email gets deleted?
-    Thanks
-
-    From msapiro at value.net  Fri Jan 14 19:48:51 2005
-    From: msapiro at value.net (Mark Sapiro)
-    Date: Fri Jan 14 19:49:04 2005
-    Subject: [Mailman-Users] mailman issues
-    In-Reply-To: <003c01c4fa40$1d99b4c0$94592252@gaurav7klgnyif>
-    Message-ID: <PC173020050114104851057801b04d55@msapiro>
-
-    gaurav_gold wrote:
-    >How can people reply to the mailing list?  How do i turn off
-    this feature? How can i also enable a feature where if someone
-    replies the newsletter the email gets deleted?
-
-    See the FAQ
-    >Mailman FAQ: http://www.python.org/cgi-bin/faqw-mm.py
-    article 3.11
-\end{verbatim}
-}
+(PENDIENTE)De manera didáctica como ayuda a los niños etc. (Bibliografía)\\
+(PENDIENTE)Autoevaluación, trabajo en equipo, proyectos, independencia(Bibliografía)
 
 \section{Estructura de la memoria}
 \label{sec:estructura}
@@ -321,18 +263,27 @@ En esta sección se debería introducir la esctura de la memoria. Así:
 \section{Objetivo general} % título de sección (se muestra)
 \label{sec:objetivo-general} % identificador de sección (no se muestra, es para poder referenciarla)
 
-Aquí vendría el objetivo general en una frase:
-Mi trabajo fin de grado consiste en crear de una herramienta de análisis de los comentarios jocosos en repositorios de software libre alojados en la plataforma GitHub.
-
-Recuerda que los objetivos siempre vienen en infinitivo.
+La realización del módulo de torneos para Dr. Scratch surge bajo la premisa de realizar modificaciones en la aplicación de Dr. Scratch para tratar que ésta resulte más atractiva a los estudiantes que la utilicen y que esto ayude a su vez a fomentar un mayor uso de la aplicación original.
 
 
 \section{Objetivos específicos}
 \label{sec:objetivos-especificos}
 
-Los objetivos específicos se pueden entender como las tareas en las que se ha desglosado el objetivo general.
-Y, sí, también vienen en infinitivo.
-
+\begin{itemize}
+	\item Promover el análisis de proyectos Scratch a través de Dr. Scratch a través de un apartado lúdico que motive y atraiga a los estudiantes.
+\end{itemize}
+\begin{itemize}
+	\item Proveer a los profesores de una aplicación administrable, que les permita tener el control de la creación, edición y borrado de las distintas entidades relacionadas con la creación de los torneos.
+\end{itemize}
+\begin{itemize}
+	\item Mejorar el control y la evaluación por parte de los profesores de los proyectos realizados por sus alumnos, proporcionándoles información centralizada sobre el avance y resultados de los proyectos a través de la aplicación. 
+\end{itemize}
+\begin{itemize}
+	\item Permitir a los alumnos realizar una autoevaluación de sus proyectos Scratch mostrando información de ayuda para la mejora en los distintos parámetros evaluados.
+\end{itemize}
+\begin{itemize}
+	\item Realizar una aplicación intuitiva, cuya información sea comprensible tanto por profesores como por alumnos y cuyos procesos sean sencillos y tengan un aspecto visual atractivo y en consonancia la aplicación de Dr. Scratch existente.
+\end{itemize}
 
 \section{Planificación temporal}
 \label{sec:planificacion-temporal}
@@ -358,59 +309,68 @@ Puedes citar libros, como el de Bonabeau et al. sobre procesos estigmérgicos~\ci
 
 También existe la posibilidad de poner notas al pie de página, por ejemplo, una para indicarte que visite la página de LibreSoft\footnote{\url{http://www.libresoft.es}}.
 
-\section{Sección 1} 
-\label{sec:seccion1}
-
-Hemos hablado de cómo incluir figuras.
-Pero no hemos dicho nada de tablas.
-A mí me gustan las tablas.
-Mucho.
-Aquí un ejemplo de tabla, la Tabla~\ref{tabla:ejemplo}.
-
-\begin{table}
- \begin{center}
-  \begin{tabular}{ | l | c | r |} % tenemos tres colummnas, la primera alineada a la izquierda (l), la segunda al centro (c) y la tercera a la derecha (r). El | indica que entre las columnas habrá una línea separadora.
-    \hline
-    1 & 2 & 3 \\ \hline % el hline nos da una línea vertical
-    4 & 5 & 6 \\ \hline
-    7 & 8 & 9 \\
-    \hline
-  \end{tabular}
-  \label{tabla:ejemplo}
-  \caption{Ejemplo de tabla}
- \end{center}
-\end{table}
-
+\section{Python} 
+\label{sec:python}
+\section{Django} 
+\label{sec:django}
+\section{HTML} 
+\label{sec:html}
+\section{CSS} 
+\label{sec:css}
+\section{JavaScript} 
+\label{sec:javascript}
+\section{jQuery} 
+\label{sec:jquery}
+\section{Hairball} 
+\label{sec:hairball}
+\section{Scratch} 
+\label{sec:scratch}
+\section{Bootstrap} 
+\label{sec:bootstrap}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % DISEÑO E IMPLEMENTACIÓN %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 \cleardoublepage
 \chapter{Diseño e implementación}
 
-Aquí viene todo lo que has hecho tú (tecnológicamente). 
-Puedes entrar hasta el detalle. 
-Es la parte más importante de la memoria, porque describe lo que has hecho tú.
-Eso sí, normalmente aconsejo no poner código, sino diagramas.
+A continuación se detalla la aplicación torneos de Dr. Scratch, incuyendo su arquitectura y su modelo de datos.
 
-\section{Arquitectura general} 
+\section{Arquitectura general}
 \label{sec:arquitectura}
 
-Si tu proyecto es un software, siempre es bueno poner la arquitectura (que es cómo se estructura tu programa a ``vista de pájaro'').
+La aplicación está desarrollada usando el framework Django, cuya arquitectura está basada en el modelo vista controlador MVC. Sin embargo, la terminología utilizada por Django varía con respecto a otros frameworks. En este caso, el controlador se denomina vista y la vista plantilla o template, por lo que en lugar de utilizar el acrónimo MVC se utiliza el acrónimo MTV: model, template, view\footnote{\url{https://docs.djangoproject.com/es/2.1/faq/general/#django-appears-to-be-a-mvc-framework-but-you-call-the-controller-the-view-and-the-view-the-template-how-come-you-don-t-use-the-standard-names}}.
 
-Por ejemplo, puedes verlo en la figura~\ref{fig:arquitectura}.
+	\begin{figure}[H]
+		\centering
+	 \includegraphics[width=18cm, keepaspectratio]{img/arquitectura}
+	 \caption{Arquitectura general}
+	 \label{fig:arquitectura}
+	\end{figure}
+	
+\subsection{Cliente}
+\label{subsec:cliente}
 
-\begin{figure}
-  \centering
-  \includegraphics[width=9cm, keepaspectratio]{img/arquitectura}
-  \caption{Estructura del parser básico}
-  \label{fig:arquitectura}
-\end{figure}
+En el lado del cliente, se encuentran las plantillas de Django que serán visualizadas por los usuarios a través de un navegador web. 
+Estas plantillas son archivos en formato HTML en los que se muestra la información de la respuesta recibida desde la vista. 
+Así mismo, las plantillas dan formato a la información de respuesta usando hojas de estilo en formato CSS y scripts en lenguaje Javascript, ejecutados en el lado del cliente. En este caso, se ha utilizado el framework Bootstrap para el desarrollo del formato de las plantillas.
 
-Si utilizas una base de datos, no te olvides de incluir también un diagrama de entidad-relación.
+\subsection{Servidor}
+\label{subsec:servidor}
+
+En el lado del servidor se realiza el desarrollo back-end al completo, desde la recepción de peticiones HTTP hasta el acceso a datos.
+
+En primer lugar, las peticiones HTTP son recibidas por un despachador de URLs en el que se define un mapeo de expresiones regulares en el que cada expresión definida se enlaza con un método definido en la vista. De este modo cuando se recibe una petición HTTP que cumple una expresión regular del despachador de URLs, este invoca al método de la vista definido en el mapeo.
+
+En la vista se encuentra la lógica de la aplicación, definiendo en ésta las operaciones a realizar y finalmente retornando la información correspondiente al cliente a través de una plantilla. 
+En la vista se realiza también el acceso a la base de datos, este acceso se realiza a través de las entidades existentes en el modelo. Cada entidad del modelo corresponde a una tabla existente en la base de datos y para realizar las consultas se realizan llamadas a los diferentes métodos de la API Queryset de Django. A través de estos métodos pueden realizarse tanto las consultas como la inserción, modificación o borrado de datos de la base de datos.
+
+Cabe mencionar que en este caso se ha utilizado la librería Django Background Tasks\footnote{\url{https://django-background-tasks.readthedocs.io/en/latest/}} para la creación de procesos asíncronos. La función a ejecutar se encuentra definida en el archivo \texttt{tasks.py} que actúa como la vista, en este caso accede a la base de datos y envía un correo electrónico si se cumple una serie de condiciones.  
+
+\section{Diseño e implementación por funcionalidad} 
+\label{sec:implementacion}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
