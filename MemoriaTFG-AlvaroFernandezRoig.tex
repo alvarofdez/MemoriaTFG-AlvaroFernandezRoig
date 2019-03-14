@@ -30,6 +30,8 @@
 \usepackage{float}  %% H para posicionar figuras
 \usepackage[nottoc, notlot, notlof, notindex]{tocbibind} %% Opciones de índice
 \usepackage{latexsym}  %% Logo LaTeX
+\usepackage{titlesec}
+\setcounter{secnumdepth}{3}
 
 \title{Memoria del Proyecto}
 \author{Nombre del autor}
@@ -229,7 +231,7 @@ El siguiente trabajo consta de la realización de un módulo independiente para la
 \section{Contexto}
 \label{sec:contexto}
 
-Dr. Scratch es una aplicación web que permite la evaluación de proyectos realizados a través de la herramienta Scratch. A través del análisis de los proyectos, Dr. Scratch puntúa en una escala de cero a tres una serie de parámetros relacionados con el pensamiento computacional, como el paralelismo o la abstracción, e identifica posibles errores en la realización de los proyectos, como duplicidades o código muerto. 
+Dr. Scratch es una aplicación web que permite la evaluación de proyectos realizados a través de la herramienta Scratch. A través del análisis de los proyectos, Dr. Scratch puntúa en una escala de cero a tres una serie de parámetros relacionados con el pensamiento computacional, e identifica posibles errores en la realización de los proyectos, como duplicidades o código muerto. Los parámetros evaluados son paralelismo, pensamiento lógico, control de flujo, interactividad con el usuario, representación de la información, abstracción y sincronización.
 
 (PENDIENTE)De manera didáctica como ayuda a los niños etc. (Bibliografía)\\
 (PENDIENTE)Autoevaluación, trabajo en equipo, proyectos, independencia(Bibliografía)
@@ -270,7 +272,7 @@ La realización del módulo de torneos para Dr. Scratch surge bajo la premisa de r
 \label{sec:objetivos-especificos}
 
 \begin{itemize}
-	\item Promover el análisis de proyectos Scratch a través de Dr. Scratch a través de un apartado lúdico que motive y atraiga a los estudiantes.
+	\item Promover el análisis de proyectos Scratch a través de Dr. Scratch proporcionando un apartado de carácter lúdico que motive y atraiga a los estudiantes.
 \end{itemize}
 \begin{itemize}
 	\item Proveer a los profesores de una aplicación administrable, que les permita tener el control de la creación, edición y borrado de las distintas entidades relacionadas con la creación de los torneos.
@@ -335,17 +337,13 @@ También existe la posibilidad de poner notas al pie de página, por ejemplo, una 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \cleardoublepage
 \chapter{Diseño e implementación}
-
 A continuación se detalla la aplicación torneos de Dr. Scratch, incuyendo su arquitectura y su modelo de datos.
-
 \section{Arquitectura general}
-\label{sec:arquitectura}
-
 La aplicación está desarrollada usando el framework Django, cuya arquitectura está basada en el modelo vista controlador MVC. Sin embargo, la terminología utilizada por Django varía con respecto a otros frameworks. En este caso, el controlador se denomina vista y la vista plantilla o template, por lo que en lugar de utilizar el acrónimo MVC se utiliza el acrónimo MTV: model, template, view\footnote{\url{https://docs.djangoproject.com/es/2.1/faq/general/#django-appears-to-be-a-mvc-framework-but-you-call-the-controller-the-view-and-the-view-the-template-how-come-you-don-t-use-the-standard-names}}.
 
 	\begin{figure}[H]
 		\centering
-	 \includegraphics[width=18cm, keepaspectratio]{img/arquitectura}
+	 \includegraphics[width=14cm, keepaspectratio]{img/arquitectura}
 	 \caption{Arquitectura general}
 	 \label{fig:arquitectura}
 	\end{figure}
@@ -353,7 +351,7 @@ La aplicación está desarrollada usando el framework Django, cuya arquitectura es
 \subsection{Cliente}
 \label{subsec:cliente}
 
-En el lado del cliente, se encuentran las plantillas de Django que serán visualizadas por los usuarios a través de un navegador web. 
+En el lado del cliente se encuentran las plantillas de Django que serán visualizadas por los usuarios a través de un navegador web. 
 Estas plantillas son archivos en formato HTML en los que se muestra la información de la respuesta recibida desde la vista. 
 Así mismo, las plantillas dan formato a la información de respuesta usando hojas de estilo en formato CSS y scripts en lenguaje Javascript, ejecutados en el lado del cliente. En este caso, se ha utilizado el framework Bootstrap para el desarrollo del formato de las plantillas.
 
@@ -362,15 +360,388 @@ Así mismo, las plantillas dan formato a la información de respuesta usando hojas
 
 En el lado del servidor se realiza el desarrollo back-end al completo, desde la recepción de peticiones HTTP hasta el acceso a datos.
 
-En primer lugar, las peticiones HTTP son recibidas por un despachador de URLs en el que se define un mapeo de expresiones regulares en el que cada expresión definida se enlaza con un método definido en la vista. De este modo cuando se recibe una petición HTTP que cumple una expresión regular del despachador de URLs, este invoca al método de la vista definido en el mapeo.
+En primer lugar, las peticiones HTTP son recibidas por un despachador de URLs denominado \texttt{urls.py} en el que se define un mapeo de expresiones regulares donde cada expresión regular corresponde a un método de la vista \texttt{views.py}. De este modo, cuando se recibe una petición HTTP que cumple una expresión regular del despachador de URLs, éste invoca al método de la vista correspondiente.
 
-En la vista se encuentra la lógica de la aplicación, definiendo en ésta las operaciones a realizar y finalmente retornando la información correspondiente al cliente a través de una plantilla. 
-En la vista se realiza también el acceso a la base de datos, este acceso se realiza a través de las entidades existentes en el modelo. Cada entidad del modelo corresponde a una tabla existente en la base de datos y para realizar las consultas se realizan llamadas a los diferentes métodos de la API Queryset de Django. A través de estos métodos pueden realizarse tanto las consultas como la inserción, modificación o borrado de datos de la base de datos.
+En la vista \texttt{views.py} se encuentra la lógica de la aplicación, en cada método de la vista se recibe una serie de parámetros de entrada, se procesa la información recibida y finalmente, se retorna la información resultante al cliente a través de una plantilla.
+En la vista se realiza también el acceso a la base de datos, este acceso se realiza a través de las entidades existentes en el modelo \texttt{models.py}. Cada entidad del modelo corresponde a una tabla existente en la base de datos y para realizar las consultas se realizan llamadas a los diferentes métodos de la API Queryset de Django. A través de estos métodos pueden realizarse tanto consultas como inserciones, modificaciones o borrado de datos de la base de datos.
 
-Cabe mencionar que en este caso se ha utilizado la librería Django Background Tasks\footnote{\url{https://django-background-tasks.readthedocs.io/en/latest/}} para la creación de procesos asíncronos. La función a ejecutar se encuentra definida en el archivo \texttt{tasks.py} que actúa como la vista, en este caso accede a la base de datos y envía un correo electrónico si se cumple una serie de condiciones.  
+Cabe mencionar que en este caso se ha utilizado la librería Django Background Tasks\footnote{\url{https://django-background-tasks.readthedocs.io/en/latest/}} para la creación de procesos asíncronos. La función a ejecutar se encuentra definida en el archivo \texttt{tasks.py} que actúa como una vista, en este caso, la función asíncrona accede a la base de datos y envía un correo electrónico si se cumple una serie de condiciones.
+
+\section{Modelo de datos} 
+\label{sec:modelodatos}
+
+Para la creación del módulo de torneos de Dr. Scratch se ha utilizado un modelo de datos independiente del modelo existente en la aplicación original de Dr. Scratch. El diagrama de entidad-relación utilizado es el siguiente:
+
+	\begin{figure}[H]
+		\centering
+	 \includegraphics[width=16cm, keepaspectratio]{img/model}
+	 \caption{Diagrama de entidad-relación}
+	 \label{fig:model}
+	\end{figure}
+
+A continuación se detallan las principales entidades del modelo. Estas definiciones ponen en contexto conceptos que deben ser previamente tenidos en cuenta a la hora de detallar el desarrollo de la aplicación.
+
+\begin{itemize}
+	\item \textbf{Creator:} La entidad \texttt{Creator} representa a los profesores, que serán los creadores de los torneos. Son los encargados de crear y administrar los torneos, de registrar a los participantes y de controlar y validar las partidas realizadas por los equipos. Para ello dispondrán de apartados solo para creadores que les permitan la realización de estas funciones.
+	\item \textbf{CreatorHash:} Entidad creada para realizar el registro de creadores. El equipo de Dr. Scratch almacena un código hash en esta tabla y se lo proporciona a los profesores interesados en la utilización de torneos de Dr. Scratch para que puedan introducirlo en el formulario de registro.
+	\item \textbf{Participant:} La entidad \texttt{Participant} representa a los estudiantes, que serán los participantes de los torneos creados. Su único cometido es jugar. Los participantes no disponen de acceso a las funcionalidades de administración y control destinadas a los creadores.
+	\item \textbf{Tournament:} Los torneos son la entidad principal sobre la que se basa el juego y están compuestos por retos y equipos. Cada torneo lo juega uno o varios equipos, cada uno de esos equipos debe superar de uno en uno y en orden los retos que se hayan definido en el torneo. Cuando un equipo haya superado todos los retos superará el torneo, sin embargo, no se ha establecido un procedimiento de ganador.
+	\item \textbf{Team:} Los equipos se componen de uno o varios participantes, permitiendo a los profesores establecer juegos individuales o por equipos. Pueden estar asociados a múltiples torneos.
+\item \textbf{Challenge:} Los retos son los desafíos individuales que deberán superar los equipos y  pueden estar asociados a uno o más torneos. En ellos se determina un valor para cada uno de los parámetros de evaluación de Dr. Scratch. Para superar el reto, los equipos deberán realizar un análisis de un proyecto Scratch cuyo resultado en cada uno de los parámetros evaluados sea igual o superior a los valores establecidos en el reto.
+\end{itemize}
+
+	\begin{figure}[H]
+		\centering
+	 \includegraphics[width=10cm, keepaspectratio]{img/puntuacion_nosuperada}
+	 \caption{Reto no superado}
+	 \label{fig:puntuacion_nosuperada}
+	\end{figure}
+	
+En la figura X.X, los valores del reto se muestran en la columna \textit{Valor requerido}. El reto se superará cuando los valores obtenidos en los parámetros lógica, control de flujo, representación de los datos y sincronización sean iguales o mayores que los establecidos en el reto.
+	
+	\begin{figure}[H]
+		\centering
+	 \includegraphics[width=10cm, keepaspectratio]{img/puntuacion_superada}
+	 \caption{Reto superado}
+	 \label{fig:puntuacion_superada}
+	\end{figure}
+		
+\begin{itemize}
+	\item \textbf{ChallengesOfTournament:} Los retos definidos en un torneo deben tener un orden, para ello se ha definido la entidad \texttt{ChallengesOfTournament} cuyo atributo \texttt{position} ordena los retos de un torneo.
+	\item \textbf{Game:} La entidad \texttt{Game} representa las partidas de los equipos. Cada partida está asociada a un equipo y a un reto concretos. En las figuras X.X y X.Y, los valores que representan la puntuación de la partida de un equipo se muestran en la columna \textit{Puntuación más alta}.
+		
+Las partidas son comunes para todos los participantes de un equipo, de este modo si un equipo tiene varios participantes y uno de ellos analiza un proyecto obteniendo una puntuación concreta, la partida se guarda y la puntuación será visualizada por el resto de participantes. 
+		
+Así mismo, los valores de la puntuación de la partida se sobrescriben solo si dicho valor en concreto es superior al de la partida existente, los valores que sean inferiores a su correspondiente valor en la partida existente no se actualizarán.
+		
+	\item \textbf{Background Task:} Los retos de un torneo pueden ser validados de manera automática, con el procedimiento descrito anteriormente, o de manera manual. Si se selecciona validación manual, cuando un reto haya sido superado por un equipo, se quedará en un estado intermedio denominado \texttt{Finalizado}. En ese momento el creador deberá comprobar la puntuación y validar manualmente la partida que pasará al estado final \texttt{Completado}. 
+A continuación se muestra un diagrama de estados que describe el proceso que se realiza al jugar una partida.
+	
+\begin{figure}[H]
+		\centering
+	 \includegraphics[width=16cm, keepaspectratio]{img/estados_partida}
+	 \caption{Diagrama de estados de una partida}
+	 \label{fig:estados partida}
+	\end{figure}
+		
+Se ha definido un mecanismo para notificar al creador a través del envío de correos electrónicos cuando un equipo finaliza una partida. Cuando el creador selecciona validación manual, puede también seleccionar la frecuencia en la que quiere recibir correos electrónicos de aviso. Las frecuencias son: nunca, inmediatamente, una vez al día y una vez a la semana.
+		
+Para el envío de correos con frecuencia una vez al día o una vez a la semana se ha creado un proceso asíncrono que revisa si existen partidas finalizadas y sin validar.
+		
+En la entidad \texttt{Background Task} se almacena un registro identificado con el email del creador y el identificador del torneo para cada ejecución asíncrona. Los registros se actualizan en cada una de las iteraciones del proceso.
+\end{itemize}
 
 \section{Diseño e implementación por funcionalidad} 
 \label{sec:implementacion}
+
+\subsection{Página principal, login y registro de creadores}
+
+La aplicación se ha integrado como un módulo independiente dentro de Dr. Scratch. Para acceder se ha creado un enlace en la barra principal superior de Dr. Scratch que redirige a la página principal de torneos. 
+
+\begin{figure}[H]
+	\centering
+ \includegraphics[width=16cm, keepaspectratio]{img/principal}
+ \caption{Página principal de Dr. Scratch}
+ \label{fig:principal}
+\end{figure}
+
+La página principal de torneos consta de un registro para creadores y de una sección en la barra superior con un menú de \textit{login}. La página principal se ha creado manteniendo el diseño existente en la sección de organizaciones de Dr. Scratch.
+
+La aplicación torneos de Dr. Scratch presenta funcionalidades independientes que dependen de si el usuario es un profesor o un alumno. Para ello se ha definido un \textit{login} que identifica si el usuario es un creador o un participante y le redirige a una pantalla principal diferente en cada caso.
+
+En el menú de \textit{login} también se encuentra la funcionalidad de recuperación de contraseña. En el proceso de recuperación de contraseña el usuario deberá introducir su email, que sirve para identificarle en la base de datos y enviarle un correo electrónico con un enlace único en el que se incluirá un token generado y que seguirá el siguiente formato: \texttt{\url{http://torneosdrscratch01.azurewebsites.net/reset_password_tournaments/MQ-54f-0bd3d0c01b4209132767/}}
+\\Al pulsar en el enlace el usuario será dirigido a una página en la que podrá establecer una nueva contraseña.
+
+Dado que los participantes pueden ser registrados con nombre de usuario y sin correo electrónico, si el participante no tiene asociada una cuenta de correo electrónico se envía el correo de recuperación de contraseña al creador que le haya registrado.
+
+\begin{figure}[H]
+	\centering
+ \includegraphics[width=6cm, keepaspectratio]{img/principal_torneos_login}
+ \caption{Página principal de torneos de Dr. Scratch: Menú de login}
+ \label{fig:principal_torneos_login}
+\end{figure}
+En cuanto al registro de creadores, se trata de un registro que sigue el mismo proceso que el utilizado para el registro de organizaciones de Dr. Scratch. El equipo de Dr. Scratch debe darle una clave al profesor para que la introduzca en el formulario de registro junto con su nombre de usuario, correo electrónico y contraseña. La clave proporcionada al profesor deberá encontrarse almacenada en el campo \texttt{hashkey} de la tabla \texttt{app\_creatorhash} y cuando el profesor se registre se eliminará de esta tabla y pasará a ser el campo \texttt{hashkey} de la tabla \texttt{app\_creator}.
+\begin{figure}[H]
+	\centering
+ \includegraphics[width=16cm, keepaspectratio]{img/principal_torneos_registro}
+ \caption{Página principal de torneos de Dr. Scratch: Registro de creadores}
+ \label{fig:principal_torneos_registro}
+\end{figure}
+
+\subsection{Funcionalidades para creadores}
+
+Los creadores dispondrán de un menú principal con cuatro funcionalidades independientes: administración de torneos, validación manual, progreso de los torneos y registrar nuevos participantes. La página principal de torneos se ha creado usando el componente \texttt{carousel} de Bootstrap con el que se puede acceder a cada una de las funcionalidades existentes.
+
+\begin{figure}[H]
+	\centering
+ \includegraphics[width=16cm, keepaspectratio]{img/main_creador}
+ \caption{Página principal de creadores}
+ \label{fig:main_creador}
+\end{figure}
+
+\subsubsection{Administración de torneos}
+
+La administración de torneos consiste en un módulo de administración para poder consultar, crear, editar y borrar torneos, equipos y retos. En la pantalla principal se encuentra un enlace a la administración de cada una de las entidades que son administrables por separado.
+
+\begin{figure}[H]
+	\centering
+ \includegraphics[width=16cm, keepaspectratio]{img/admin_creador}
+ \caption{Página principal de la administración de torneos}
+ \label{fig:admin_creador}
+\end{figure}
+
+\vspace{0.5cm}
+\textbf{Retos}
+\vspace{0.5cm}
+
+Al acceder a la administración de retos se muestra un listado con los retos creados por el usuario. Por cada reto se muestra su nombre y descripción y tres botones que permiten ver el detalle del reto, editarlo o eliminarlo.
+El listado se divide en páginas de tres elementos como máximo. La navegación entre páginas se realiza a través de un paginador.
+Así mismo, en la parte inferior se encuentra un botón que permite crear un nuevo reto.
+\begin{figure}[H]
+	\centering
+ \includegraphics[width=16cm, keepaspectratio]{img/lista_retos}
+ \caption{Listado de retos}
+ \label{fig:lista_retos}
+\end{figure}
+
+Para crear o editar un reto se ha definido un formulario de Django denominado \texttt{ChallengeForm} en el archivo \texttt{forms.py}. 
+
+\begingroup
+	\fontsize{7pt}{8pt}\selectfont
+	\begin{verbatim}
+		DIFFICULTY_CHOICES= [
+    (0, _('None: 0')),
+    (1, _('Easy: 1')),
+    (2, _('Medium: 2')),
+    (3, _('Hard: 3')),
+    ]
+    
+class ChallengeForm (forms.Form):
+    name = forms.CharField(max_length=50, widget=forms.TextInput(), required=True)
+    description = forms.CharField(max_length=500, widget=forms.Textarea(), required=True)
+    parallelism = forms.ChoiceField(widget=forms.RadioSelect, choices=DIFFICULTY_CHOICES, initial=0)
+    logic = forms.ChoiceField(widget=forms.RadioSelect, choices=DIFFICULTY_CHOICES, initial=0)
+    flowControl = forms.ChoiceField(widget=forms.RadioSelect, choices=DIFFICULTY_CHOICES, initial=0)
+    userInteractivity = forms.ChoiceField(widget=forms.RadioSelect, choices=DIFFICULTY_CHOICES, initial=0)
+    dataRepresentation = forms.ChoiceField(widget=forms.RadioSelect, choices=DIFFICULTY_CHOICES, initial=0)
+    abstraction = forms.ChoiceField(widget=forms.RadioSelect, choices=DIFFICULTY_CHOICES, initial=0)
+    synchronization = forms.ChoiceField(widget=forms.RadioSelect, choices=DIFFICULTY_CHOICES, initial=0)
+	\end{verbatim}
+\endgroup
+
+Cuando se edita un reto, se recogen los valores del reto seleccionado de la base de datos y se precargan en el formulario \texttt{ChallengeForm} sobrescribiendo el parámetro \texttt{initial}.
+
+Al pulsar en el botón \texttt{Borrar} aparecerá una ventana modal en la que se solicita confirmación para borrar el reto. Al confirmar, el reto se borrará siempre y cuando no esté asociado a ningún torneo.
+
+El detalle del reto despliega una ventana modal en la que, de manera visual a través de \textit{progress bars} de Bootstrap, se muestran los valores de cada uno de los parámetros del reto. Cada uno de los conceptos tendrá un enlace al tutorial de Dr. Scratch por si el profesor quiere revisar el significado de alguno de los conceptos de pensamiento computacional evaluables.
+
+\begin{figure}[H]
+	\centering
+ \includegraphics[width=10cm, keepaspectratio]{img/detalle_reto}
+ \caption{Detalle de un reto}
+ \label{fig:detalle_reto}
+\end{figure}
+
+\vspace{0.5cm}
+\textbf{Equipos}
+\vspace{0.5cm}
+
+Al acceder a la administración de equipos, se muestra una pantalla con un listado de equipos, esta pantalla tiene el mismo formato que el listado de retos de la figura X.X, pudiendo crear, editar o borrar equipos y, además, consultar los participantes de los equipos creados.
+
+El formulario de creación y edición de equipos se denomina \texttt{TeamForm} y sus campos son únicamente nombre y descripción.
+\begingroup
+	\fontsize{7pt}{8pt}
+	\selectfont
+	\begin{verbatim}    
+		class TeamForm (forms.Form):
+		    name = forms.CharField(max_length=50, widget=forms.TextInput(), required=True)
+		    description = forms.CharField(max_length=500, widget=forms.Textarea(), required=True)
+	\end{verbatim}
+\endgroup
+Para añadir participantes al equipo, se incluyen listas desplegables con los participantes que haya registrado el creador que está administrando el equipo. Podrán incluirse hasta un máximo de cinco participantes por equipo.
+\begin{figure}[H]
+	\centering
+ \includegraphics[width=10cm, keepaspectratio]{img/nuevo_equipo}
+ \caption{Creación de equipo}
+ \label{fig:nuevo_equipo}
+\end{figure}
+
+La consulta de participantes sigue el mismo formato que en la administración de retos, pudiendo consultar los participantes de los equipos creados a través de una ventana modal.
+\begin{figure}[H]
+	\centering
+ \includegraphics[width=10cm, keepaspectratio]{img/participantes_equipo}
+ \caption{Ver participantes de un equipo}
+ \label{fig:participantes_equipo}
+\end{figure}
+
+El borrado de un equipo se realiza del mismo modo que el borrado de retos. Se solicita confirmación a través de una ventana modal y no pueden borrarse equipos que se encuentren asociados a algún torneo.
+
+\vspace{0.5cm}
+\textbf{Torneos}
+\vspace{0.5cm}
+
+Al acceder a la administración de torneos, se muestra una pantalla con un listado de torneos, esta pantalla tiene el mismo formato que el listado de retos o equipos de la figura X.X, pudiendo crear torneos o editar, borrar y ver el detalle de los torneos creados.
+
+La creación de torneos consta de tres secciones. En primer lugar se define el nombre y la descripción del torneo. En segundo lugar, se establecen los equipos y retos del torneo. Podrán incluirse hasta un máximo de cuatro equipos y cuatro retos. Los retos incluidos se ordenarán de arriba a abajo con respecto al formulario. Para facilitar la creación de torneos, se han definido dos enlaces que abren sendas ventanas modales con los formularios de creación de retos y equipos respectivamente.
+Y en tercer lugar debe seleccionarse la configuración de validación de los retos del torneo y la periodicidad de recepción de correos electrónicos de notificación. 
+
+Para la creación y edición de torneos se ha creado el formulario denominado \texttt{TournamentForm}.
+
+\begingroup
+	\fontsize{7pt}{8pt}\selectfont
+	\begin{verbatim}
+		NOTIFICATION_CHOICES= [
+		    (0, _('Never')),
+		    (1, _('Immediately')),
+		    (2, _('Once a day')),
+		    (3, _('Once a week')),
+		]
+			
+		class TournamentForm(forms.Form):
+		    name = forms.CharField(max_length=50, widget=forms.TextInput(), required=True)
+		    description = forms.CharField(max_length=500, widget=forms.Textarea(), required=True)
+		    manualValidation = forms.BooleanField(widget=forms.CheckboxInput(), required=False)
+		    notificationPeriod = forms.ChoiceField(widget=forms.Select(), choices=NOTIFICATION_CHOICES, initial=0)
+	\end{verbatim}
+\endgroup
+
+\newpage
+
+\begin{figure}[H]
+	\centering
+ \includegraphics[width=10cm, keepaspectratio]{img/nuevo_torneo}
+ \caption{Creación de torneo}
+ \label{fig:nuevo_torneo}
+\end{figure}
+
+El borrado de torneos se realizará del mismo modo que el borrado de equipos y retos. Al pulsar en el botón \texttt{Borrar} se abre una ventana modal para pedir confirmación al creador.
+\\
+Al pulsar el botón \texttt{Detalle} se abre una ventana modal con la información de los retos y equipos establecidos así como de la configuración de validación.
+
+En la ventana modal aparece un listado con los nombres de los retos y los equipos, sin embargo, si se pasa el ratón por encima del nombre de un reto aparecerá el valor de sus parámetros y si se pasa por encima del nombre de un equipo aparecerán los nombres de usuario de sus participantes. De este modo el creador dispondrá de toda la información necesaria en el detalle de torneo.
+
+\begin{figure}[H]
+	\centering
+ \includegraphics[width=10cm, keepaspectratio]{img/detalle_torneo}
+ \caption{Detalle de torneo}
+ \label{fig:detalle_torneo}
+\end{figure}
+
+\newpage
+\subsubsection{Validación manual}
+ 
+En la sección de validación manual se podrán comprobar y validar las partidas de los torneos seleccionados con la opción de validación manual.
+
+Para discriminar entre las partidas en estado \textit{Finalizado} y las partidas en estado \textit{Completado} (figura X.X), se han incluido dos campos en la entidad \texttt{Game} denominados \texttt{completed} y \texttt{done}.
+
+\begingroup
+	\fontsize{7pt}{8pt}\selectfont
+	\begin{verbatim}
+      completed = models.IntegerField(default=int(0))
+      done = models.IntegerField(default=int(0))
+	\end{verbatim}
+\endgroup
+		
+Cuando una partida pasa al estado \textit{Finalizado}, se marca el campo \texttt{done} con un 1. En el caso de que el torneo en cuestión sea de validación automática el campo \texttt{completed} también se marca con un 1 y se pasa al siguiente reto, pero si el torneo es de validación manual el campo \texttt{completed} será 0.
+
+Por lo tanto, en la sección de validación manual aparecerán las partidas (\texttt{Game}) cuyo campo \texttt{done} sea 1 y su campo \texttt{completed} sea 0, y al validar una partida se marcará el campo \texttt{completed} a 1, pasando el equipo correspondiente al siguiente reto, si lo hubiera, o superando el torneo si fuera el último reto.
+
+Para la sección de validación manual se han creado dos pantallas, la primera contiene un listado con todos los torneos que tienen alguna partida superada y sin validar. En este listado cada torneo tiene un botón denominado \textit{Validar Partidas} que lleva al creador a otro listado con los equipos de ese torneo que tienen partidas pendientes de validación.
+
+En el segundo listado, cada equipo tiene a su vez un botón denominado \textit{Validar} que abre una ventana modal en la que el creador puede ver los miembros del equipo seleccionado, los valores de los parámetros del reto y la puntuación de la partida y en la que podrá finalmente validar la partida.
+
+\newpage
+
+\begin{figure}[H]
+  		\centering
+ 		 \includegraphics[width=10cm, keepaspectratio]{img/validar_torneos}
+		 \includegraphics[width=10cm, keepaspectratio]{img/validar_equipos}
+ 		 \caption{Validación manual: listado de torneos y equipos}
+ 		 \label{fig:validacion_manual_listados}
+	\end{figure}
+
+\begin{figure}[H]
+	\centering
+ \includegraphics[width=7cm, keepaspectratio]{img/validar_partida}
+ \caption{Validación manual: ventana modal}
+ \label{fig:validacion_manual_listados_modal}
+\end{figure}
+
+\subsubsection{Progreso de los torneos}
+
+En la sección de progreso de los torneos, los creadores podrán realizar un seguimiento de todas las partidas que se encuentren en curso para cada uno de los torneos que hayan creado.
+
+Al acceder a la sección de progreso de los torneos se muestra un listado con los torneos creados por el usuario, que mantiene el formato usado en la figura X.X. 
+
+En este caso, cada torneo dispone de dos operaciones, la primera es poder ver el detalle de los torneos. El detalle tiene el mismo formato que el definido en la sección de administración (figura X.X).
+
+La segunda operación muestra la pantalla de progreso de los torneos. Esta pantalla tiene una finalidad meramente informativa y no presenta ninguna operación. En ella se muestra la información de las partidas del mismo modo que se muestra a los equipos a la hora de jugar. 
+
+Con un título en rojo se muestra el nombre del equipo que ha realizado la partida y debajo, el nombre y descripción del torneo.
+
+Bajo la descripción del torneo se muestra una barra de progreso con pasos, en la que cada paso corresponde a un reto del torneo. Con los botones \textit{Anterior} y \textit{Siguiente} el creador podrá navegar por los distintos retos del torneo. A diferencia de los participantes, que no podrán avanzar al siguiente reto a no ser que completen el reto en el que se encuentran, el creador podrá navegar por todos los retos, estén superados o no por el equipo, para disponer de la información completa del torneo.
+
+Los números de la barra de progreso siguen el siguiente código de colores: 
+\begin{itemize}
+	\item El reto marcado en \textbf{amarillo} será el reto seleccionado por el creador. Por lo tanto, la información que aparecerá en el panel será la correspondiente a ese reto. 
+\item Los retos marcados en \textbf{verde} serán los retos superados por el equipo.
+\item Los retos marcados en \textbf{gris} serán los retos que aún no se encuentran superados por el equipo.
+\end{itemize}
+
+Para crear la barra de progreso se ha utilizado el plugin jQuery Easy Wizard\footnote{\url{https://www.jqueryscript.net/other/Simple-Wizard-Modal-Plugin-with-jQuery-Bootstrap-Easy-Wizard.html}}. En el archivo \texttt{easyWizard.css} se han adaptado los colores para que coincidieran con los tonos usados en las \textit{progress bars} de Dr. Scratch, y el archivo \texttt{easyWizard.js} se ha sustituido por completo utilizando un script con un comportamiento totalmente personalizado.
+
+En la parte inferior de la barra de progreso se muestra el nombre y la descripción del reto seleccionado y bajo estos, los valores establecidos en el reto en la columna \textit{Valor requerido} y los valores de la partida en la columna \textit{Puntuación más alta}.
+
+Finalmente, en la parte inferior se encuentra un paginador, en el que cada página corresponde a un equipo incluido en el torneo.
+
+\begin{figure}[H]
+	\centering
+ \includegraphics[width=10cm, keepaspectratio]{img/progreso}
+ \caption{Progreso de los torneos}
+ \label{fig:progreso}
+\end{figure}
+
+\subsubsection{Registrar a nuevos participantes}
+
+La sección de registro de participantes consta de una única pantalla que incluye tres formularios. En ellos, los creadores podrán registrar de uno a veinte participantes al mismo tiempo pudiendo usar cualquiera de las tres opciones indistintamente.
+
+\begin{figure}[H]
+	\centering
+ \includegraphics[width=16cm, keepaspectratio]{img/registro_participantes}
+ \caption{Registrar a nuevos participantes}
+ \label{fig:registro_participantes}
+\end{figure}
+
+Los dos primeros formularios constan cada uno de un elemento de tipo \textit{File}. Al recibir el fichero adjunto, se comprueba que la extensión del archivo sea CSV y TXT respectivamente y se leen las primeras veinte líneas de los archivos utilizando la siguiente función:
+
+\begingroup
+	\fontsize{7pt}{8pt}\selectfont
+	\begin{verbatim}
+	    username = file.readline().rstrip()
+	\end{verbatim}
+\endgroup
+
+En el tercer formulario se establecen veinte campos de tipo \textit{input}. Mediante \texttt{jQuery} se ocultan todos los \textit{inputs} salvo el primero y cuando el creador pulsa el botón \texttt{+} se muestra el siguiente \textit{input}. La función \texttt{jQuery} utilizada es la siguiente:
+
+\begingroup
+	\fontsize{7pt}{8pt}\selectfont
+	\begin{verbatim}
+	    $(document).on("ready", function(){
+          $('.row-line').eq(0).show();
+      });
+      $(".plus-link").on("click", function(){
+	        newId = parseInt(this.id)+1
+	        if ($('.row-line').eq(newId).length > 0){
+		          $('.row-line').eq(newId).show();
+	         }
+	         $(this).hide();
+       });
+	\end{verbatim}
+\endgroup
+
+Posteriormente, se registran uno por uno los participantes comprobando que aún no se encuentran registrados y utilizando el nombre de usuario recibido también como contraseña.
+
+Existe una diferencia entre los participantes registrados usando una dirección de correo electrónico y los registrados usando un nombre de usuario. Si los participantes no tienen dirección de correo electrónico propia, el email de recuperación de contraseña se enviará a la dirección del creador que los haya registrado.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
