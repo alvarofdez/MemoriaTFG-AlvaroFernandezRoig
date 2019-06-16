@@ -77,7 +77,7 @@ Trabajo Fin de Grado
 \vspace{2.5cm}
 
 \LARGE
-TORNEOS DE DR. SCRATCH
+TORNEOS CON DR. SCRATCH
 
 \vspace{4cm}
 
@@ -105,7 +105,7 @@ Tutor : Dr. Gregorio Robles
 
 \vspace{1cm}
 \large
-Torneos de Dr. Scratch
+Torneos con Dr. Scratch
 
 \vspace{1cm}
 \large
@@ -187,7 +187,7 @@ El módulo se ha creado como una aplicación independiente, utilizando un modelo d
 
 Con la creación de este módulo se ha tratado de fomentar una mayor utilización de la funcionalidad original, haciendo que su uso resulte atractivo para los estudiantes y práctico para los profesores.
 
-El módulo de torneos de Dr. Scratch se ha desarrollado utilizando Django, un framework en lenguaje Python. Se ha utilizado una base de datos PostgreSQL, y para el diseño de las pantallas se ha utilizado el framework Bootstrap. 
+El módulo de torneos con Dr. Scratch se ha desarrollado utilizando Django, un framework en lenguaje Python. Se ha utilizado una base de datos PostgreSQL, y para el diseño de las pantallas se ha utilizado el framework Bootstrap. 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -237,16 +237,16 @@ The tournament module of Dr. Scratch has been developed using Django, a Python f
 \label{sec:intro} % etiqueta para poder referenciar luego en el texto con ~\ref{sec:intro}
 \pagenumbering{arabic} % para empezar la numeración de página con números
 
-El siguiente trabajo consta de la realización de un módulo independiente para la aplicación Dr. Scratch. Se trata del módulo de torneos de Dr. Scratch, que permitirá a los docentes la creación de torneos y la participación en ellos de sus alumnos.
+El siguiente trabajo consta de la realización de un módulo independiente para la aplicación Dr. Scratch. Se trata del módulo de torneos con Dr. Scratch, que permitirá a los docentes la creación de torneos y la participación en ellos de sus alumnos.
 
 \section{Contexto}
 \label{sec:contexto}
 
 Dr. Scratch es una aplicación web que permite la evaluación de proyectos realizados a través de la herramienta Scratch. A través del análisis de los proyectos, Dr. Scratch puntúa en una escala de cero a tres una serie de parámetros relacionados con el pensamiento computacional, e identifica posibles errores en la realización de los proyectos, como duplicidades o código muerto. Los parámetros evaluados son paralelismo, pensamiento lógico, control de flujo, interactividad con el usuario, representación de la información, abstracción y sincronización.
 
-La participación de los alumnos en los torneos de Dr. Scratch se realiza a través de la formación de equipos, fomentando de este modo el uso del aprendizaje cooperativo. Mediante el uso del aprendizaje cooperativo, los alumnos trabajan en grupos reducidos, de este modo intervienen no solo en su propio aprendizaje sino en el del resto de miembros del equipo, buscando un resultado beneficioso tanto para ellos mismos como para el resto de sus compañeros~\cite{johnson:_cooperative_learning}.
+La participación de los alumnos en los torneos con Dr. Scratch se realiza a través de la formación de equipos, fomentando de este modo el uso del aprendizaje cooperativo. Mediante el uso del aprendizaje cooperativo, los alumnos trabajan en grupos reducidos, de este modo intervienen no solo en su propio aprendizaje sino en el del resto de miembros del equipo, buscando un resultado beneficioso tanto para ellos mismos como para el resto de sus compañeros~\cite{johnson:_cooperative_learning}.
 
-Así mismo, los torneos de Dr. Scratch permiten a los alumnos la autoevaluación en grupo de sus propios proyectos Scratch. A través de la autoevaluación, los alumnos participan activamente en el proceso de aprendizaje, aumentando su responsabilidad en el mismo y ligando el aprendizaje a sus intereses, capacidades y motivaciones~\cite{munoz:_autoevaluacion}.
+Así mismo, los torneos con Dr. Scratch permiten a los alumnos la autoevaluación en grupo de sus propios proyectos Scratch. A través de la autoevaluación, los alumnos participan activamente en el proceso de aprendizaje, aumentando su responsabilidad en el mismo y ligando el aprendizaje a sus intereses, capacidades y motivaciones~\cite{munoz:_autoevaluacion}.
 
 \section{Estructura de la memoria}
 \label{sec:estructura}
@@ -309,7 +309,7 @@ Finalmente en octubre de 2019 retomé, esta vez con plena dedicación, el desarrol
 
  \begin{figure}[H]
 		\centering
-	 \includegraphics[width=12cm, keepaspectratio]{img/planificacion}
+	 \includegraphics[width=16cm, keepaspectratio]{img/planificacion}
 	 \caption{Planificación temporal}
 	 \label{fig:planificacion}
 	\end{figure}
@@ -321,6 +321,8 @@ La duración de las jornadas ha cambiado a lo largo de la duración del proyecto.
   \item Del 14 de febrero al 19 de febrero: 8 horas al día en el manual de usuario.
   \item Del 25 de febrero al 4 de marzo: 8 horas al día en el despliegue.
   \item Del 4 de marzo al 20 de marzo: 8 horas al día en la memoria.
+	\item Del 5 de marzo al 13 de junio: pruebas de usuario, asistencia en remoto.
+	\item Del 14 de junio al 16 de junio: 8 horas al día en la memoria. Inclusión de los resultados de las pruebas.
 \end{itemize}	
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -402,7 +404,7 @@ La creación de páginas web mediante Bootstrap se simplifica al disponer de eleme
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \cleardoublepage
 \chapter{Diseño e implementación}
-A continuación se detalla el módulo de torneos de Dr. Scratch, incuyendo su arquitectura y su modelo de datos.
+A continuación se detalla el módulo de torneos con Dr. Scratch, incuyendo su arquitectura y su modelo de datos.
 \section{Arquitectura general}
 El módulo de torneos está desarrollado usando el framework Django, cuya arquitectura está basada en el modelo vista controlador MVC. Sin embargo, la terminología utilizada por Django varía con respecto a otros frameworks. En este caso, el controlador se denomina vista y la vista plantilla o template, por lo que en lugar de utilizar el acrónimo MVC se utiliza el acrónimo MTV: model, template, view\footnote{\url{https://docs.djangoproject.com/es/2.1/faq/general/#django-appears-to-be-a-mvc-framework-but-you-call-the-controller-the-view-and-the-view-the-template-how-come-you-don-t-use-the-standard-names}}.
 
@@ -416,9 +418,7 @@ El módulo de torneos está desarrollado usando el framework Django, cuya arquitec
 \subsection{Cliente}
 \label{subsec:cliente}
 
-En el lado del cliente se encuentran las plantillas de Django que serán visualizadas por los usuarios a través de un navegador web. 
-Estas plantillas son archivos en formato HTML en los que se muestra la información de la respuesta recibida desde la vista. 
-Así mismo, las plantillas dan formato a la información de respuesta usando hojas de estilo en formato CSS y scripts en lenguaje Javascript, ejecutados en el lado del cliente. En este caso, se ha utilizado el framework Bootstrap para el desarrollo del formato de las plantillas.
+En el lado del cliente se encuentra el navegador web del usuario. El usuario interactuará con la aplicación a través de peticiones HTTP que serán interpretadas en el lado del servidor. La creación de las plantillas con el framework Bootstrap permite que las pantallas sean responsive, es decir, que se ajusten automáticamente a la resolución de pantalla del dispositivo en el que se muestran. De este modo, las diferentes pantallas pueden visualizarse sin problemas tanto desde ordenadores como desde dispositivos móviles o tablets.
 
 \subsection{Servidor}
 \label{subsec:servidor}
@@ -427,7 +427,8 @@ En el lado del servidor se realiza el desarrollo back-end al completo, desde la 
 
 En primer lugar, las peticiones HTTP son recibidas por un despachador de URLs denominado \texttt{urls.py}, en el que se define un mapeo de expresiones regulares donde cada expresión regular corresponde a un método de la vista \texttt{views.py}. De este modo, cuando se recibe una petición HTTP que cumple una expresión regular del despachador de URLs, éste invoca al método de la vista correspondiente.
 
-En la vista \texttt{views.py} se encuentra la lógica de la aplicación, en cada método de la vista se recibe una serie de parámetros de entrada, se procesa la información recibida y finalmente, se retorna la información resultante al cliente a través de una plantilla.
+En la vista \texttt{views.py} se encuentra la lógica de la aplicación, en cada método de la vista se recibe una serie de parámetros de entrada, se procesa la información recibida y finalmente, se retorna la información resultante al cliente a través de una plantilla. Estas plantillas son archivos en formato HTML en los que se muestra la información de la respuesta recibida desde la vista. En este caso, se ha utilizado el framework Bootstrap para el desarrollo del formato de las plantillas.
+
 En la vista se realiza también el acceso a la base de datos, este acceso se realiza a través de las entidades existentes en el modelo \texttt{models.py}. Cada entidad del modelo corresponde a una tabla existente en la base de datos y para realizar las consultas se realizan llamadas a los diferentes métodos de la API Queryset de Django. A través de estos métodos pueden realizarse tanto consultas como inserciones, modificaciones o borrado de datos de la base de datos.
 
 Cabe mencionar que en este caso se ha utilizado la librería Django Background Tasks\footnote{\url{https://django-background-tasks.readthedocs.io/en/latest}} para la creación de procesos asíncronos. La función a ejecutar se encuentra definida en el archivo \texttt{tasks.py} que actúa como una vista.
@@ -435,7 +436,7 @@ Cabe mencionar que en este caso se ha utilizado la librería Django Background Ta
 \section{Modelo de datos} 
 \label{sec:modelodatos}
 
-Para la creación del módulo de torneos de Dr. Scratch se ha utilizado un modelo de datos independiente del modelo existente en la aplicación original de Dr. Scratch. El diagrama de entidad-relación utilizado es el siguiente:
+Para la creación del módulo de torneos con Dr. Scratch se ha utilizado un modelo de datos independiente del modelo existente en la aplicación original de Dr. Scratch. El diagrama de entidad-relación utilizado es el siguiente:
 
 	\begin{figure}[H]
 		\centering
@@ -448,7 +449,7 @@ A continuación se detallan las principales entidades del modelo. Estas definicio
 
 \begin{itemize}
 	\item \textbf{Creator:} La entidad \texttt{Creator} representa a los profesores, que serán los creadores de los torneos. Son los encargados de crear y administrar los torneos, de registrar a los participantes y de controlar y validar las partidas realizadas por los equipos. Para ello dispondrán de apartados solo para creadores que les permitan la realización de estas funciones.
-	\item \textbf{CreatorHash:} Entidad creada para realizar el registro de creadores. El equipo de Dr. Scratch almacena un código hash en esta tabla y se lo proporciona a los profesores interesados en la utilización de torneos de Dr. Scratch para que puedan introducirlo en el formulario de registro.
+	\item \textbf{CreatorHash:} Entidad creada para realizar el registro de creadores. El equipo de Dr. Scratch almacena un código hash en esta tabla y se lo proporciona a los profesores interesados en la utilización de torneos con Dr. Scratch para que puedan introducirlo en el formulario de registro.
 	\item \textbf{Participant:} La entidad \texttt{Participant} representa a los estudiantes, que serán los participantes de los torneos creados. Su único cometido es jugar. Los participantes no disponen de acceso a las funcionalidades de administración y control destinadas a los creadores.
 	\item \textbf{Tournament:} Los torneos son la entidad principal sobre la que se basa el juego y están compuestos por retos y equipos. Cada torneo lo juega uno o varios equipos, cada uno de esos equipos debe superar de uno en uno y en orden los retos que se hayan definido en el torneo. Cuando un equipo haya superado todos los retos superará el torneo, sin embargo, no se ha establecido un procedimiento de ganador.
 	\item \textbf{Team:} Los equipos se componen de uno o varios participantes, permitiendo a los profesores establecer juegos individuales o por equipos. Pueden estar asociados a múltiples torneos.
@@ -512,7 +513,7 @@ La aplicación se ha integrado como un módulo independiente dentro de Dr. Scratch
 
 La página principal de torneos consta de un registro para creadores y de una sección en la barra superior con un menú de \textit{login}. La página principal se ha creado manteniendo el diseño existente en la sección de organizaciones de Dr. Scratch.
 
-La aplicación torneos de Dr. Scratch presenta funcionalidades independientes que dependen de si el usuario es un profesor o un alumno. Para ello se ha definido un \textit{login} que identifica si el usuario es un creador o un participante y le redirige a una pantalla principal diferente en cada caso.
+La aplicación torneos con Dr. Scratch presenta funcionalidades independientes que dependen de si el usuario es un profesor o un alumno. Para ello se ha definido un \textit{login} que identifica si el usuario es un creador o un participante y le redirige a una pantalla principal diferente en cada caso.
 
 En el menú de \textit{login} también se encuentra la funcionalidad de recuperación de contraseña. En el proceso de recuperación de contraseña el usuario deberá introducir su email, que sirve para identificarle en la base de datos y enviarle un correo electrónico con un enlace único en el que se incluirá un token generado y que seguirá el siguiente formato: \texttt{\url{http://torneosdrscratch01.azurewebsites.net/reset_password_tournaments/MQ-54f-0bd3d0c01b4209132767/}}
 \\Al pulsar en el enlace el usuario será dirigido a una página en la que podrá establecer una nueva contraseña.
@@ -522,7 +523,7 @@ Dado que los participantes pueden ser registrados con nombre de usuario y sin co
 \begin{figure}[H]
 	\centering
  \includegraphics[width=6cm, keepaspectratio]{img/principal_torneos_login}
- \caption{Página principal de torneos de Dr. Scratch: Menú de login}
+ \caption{Página principal de torneos con Dr. Scratch: Menú de login}
  \label{fig:principal_torneos_login}
 \end{figure}
 \newpage
@@ -530,7 +531,7 @@ En cuanto al registro de creadores, se trata de un registro que sigue el mismo p
 \begin{figure}[H]
 	\centering
  \includegraphics[width=16cm, keepaspectratio]{img/principal_torneos_registro}
- \caption{Página principal de torneos de Dr. Scratch: Registro de creadores}
+ \caption{Página principal de torneos con Dr. Scratch: Registro de creadores}
  \label{fig:principal_torneos_registro}
 \end{figure}
 
@@ -917,6 +918,44 @@ Por último, cuando un participante haya completado el torneo, en la página princ
 \cleardoublepage
 \chapter{Resultados}
 
+Para comprobar la viabilidad del proyecto, se ha probado la aplicación en un entorno real. 
+Se ha contado con la ayuda de Jorge, un profesor del C.E.I.P. Lope de Vega de Madrid, que ha realizado varios torneos con alumnos de 4º de primaria.
+
+Para que la aplicación estuviera disponible, primero se ha realizado un despliegue a través de Azure, tanto de la aplicación web como de la base de datos.
+
+Para la base de datos se ha optado por crear un recurso de Servidor de Azure Database for PostgreSQL. Originariamente se contaba con una instancia de base de datos de MySQL por lo que se ha modificado el atributo \texttt{DATABASES} del archivo \texttt{settings.py}.
+
+\begingroup
+	\fontsize{7pt}{8pt}\selectfont
+	\begin{verbatim}
+	    'ENGINE': 'django.db.backends.postgresql_psycopg2'
+	\end{verbatim}
+\endgroup
+
+Para el despliegue de la aplicación se ha creado un recurso App Service gratuito de un núcleo de 1GB de almacenamiento.
+
+Para poder desplegar correctamente la aplicación en el recurso creado, se ha realizado una serie de modificaciones entre las que se incluye la creación de un archivo \texttt{requirements.txt} que permite, mediante la consola de Kudu de Azure, la instalación de los plugins de Python necesarios para el funcionamiento de la aplicación, tales como Hairball o Kurt.
+
+Así mismo, se incluyen los archivos \texttt{web.config} y \texttt{run\_waitress\_server.py} para la correcta publicación de la aplicación incluyendo sus archivos estáticos \footnote{\url{https://blogs.msdn.microsoft.com/azureossds/2017/09/01/django-app-with-httpplatformhandler-in-azure-app-services-windows}}.
+
+\newpage
+Una vez desplegada la aplicación, Jorge y sus alumnos utilizaron el módulo de torneos con Dr. Scratch para crear torneos y evaluar sus proyectos Scratch. Estas pruebas duraron tres meses y finalmente tanto Jorge como sus alumnos contestaron a un breve cuestionario para ofrecer su impresión sobre la aplicación. Los resultados de los cuestionarios son los siguientes.
+
+\begin{figure}[H]
+	\centering
+ \includegraphics[width=14cm, keepaspectratio]{img/cuestionario_creadores}
+ \caption{Respuestas del cuestionario de creadores}
+ \label{fig:cuestionario_creadores}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+ \includegraphics[width=16cm, keepaspectratio]{img/cuestionario_participantes}
+ \caption{Respuestas del cuestionario de participantes}
+ \label{fig:cuestionario_participantes}
+\end{figure}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % CONCLUSIONES %
@@ -930,14 +969,69 @@ Por último, cuando un participante haya completado el torneo, en la página princ
 \section{Consecución de objetivos}
 \label{sec:consecucion-objetivos}
 
+Pese a haber realizado las pruebas en un entorno reducido y disponer de escasa retroalimentación,  los resultados se consideran satisfactorios.
+
+El principal objetivo, que era proporcionar una aplicación que resultara atractiva a los alumnos y fomentara el uso de Dr. Scratch, parece haberse conseguido, ya que a la pregunta \textit{¿Te ha resultado más entretenido hacer los proyectos Scratch usando torneos con Dr. Scratch?} el 100\% de los alumnos ha respondido que sí.
+
+Por otro lado, los estudiantes han considerado que la aplicación es suficientemente intuitiva, un 87.5\% consideran que era fácil de utilizar. Esta respuesta resulta especialmente significativa si tenemos en cuenta que se trata de alumnos de 4º de primaria, de edades en torno a 9 o 10 años. Resulta interesante que el rango de edades de uso de la aplicación sea lo más amplio posible.
+
+Y por último, los alumnos consideran que la aplicación les ha ayudado a mejorar sus proyectos Scratch, contestando con \textit{Bastante} (57,1\%) o \textit{Mucho} (42,9\%). Por lo tanto, en base a las respuestas obtenidas consideramos que de parte de los estudiantes se han cumplido a grandes rasgos los objetivos establecidos en una primera fase del proyecto.
+
+
+En cuanto a los resultados de la encuesta para profesores, pese a contar con un solo caso de uso, se ha obtenido información suficiente para la mejora de la aplicación en trabajos futuros.
+
+Gracias a la información proporcionada por Jorge, el profesor encargado de realizar las pruebas, se ha llegado a la conclusión de que la aplicación, en su estado actual, permite el control por parte del profesor de los torneos y equipos creados y de los proyectos realizados por los alumnos. 
+Sin embargo, la administración y el control del registro y del perfil de los participantes y un histórico de su participación en los distintos torneos son algunos de los aspectos a mejorar. 
+
+También se llega a la conclusión de que el menú de creadores, más complejo y amplio que el de participantes, no resulta del todo intuitivo por lo que es otro punto a mejorar.
+
 \section{Aplicación de lo aprendido}
 \label{sec:aplicacion}
+
+A lo largo del proyecto se han aplicado los conocimientos de programación de manera general, y en particular los conocimientos previos obtenidos en las tecnologías utilizadas en el proyecto, tales como Python y Django o HTML, CSS, JavaScript, etc.
+
+Las asignaturas que más han contribuido en el conocimiento previo a la hora de realizar este proyecto son las siguientes:
+\begin{itemize}
+	\item Fundamentos de programación. Conceptos generales de la programación orientada a objetos.
+\end{itemize}
+\begin{itemize}
+	\item Aplicaciones telemáticas. Conocimiento de HTML, CSS, JavaScript, JQuery y Bootstrap.
+\end{itemize}
+\begin{itemize}
+	\item Servicios y aplicaciones telemáticas y Desarrollo de aplicaciones telemáticas. Creación de aplicaciones en lenguaje Python con el uso de Django.
+\end{itemize}
 
 \section{Lecciones aprendidas}
 \label{sec:lecciones_aprendidas}
 
+Entre las lecciones aprendidas en este proyecto, sin duda destacaría dos.
+
+Por un lado, el aprendizaje del lenguaje de programación Python y el framework Django. Con una base ya obtenida a lo largo de la titulación de grado he podido afrontar con garantías la realización del proyecto y aprender con mayor profundidad el uso tanto de Python como de Django.
+
+Por otro, el uso de Azure, la creación de recursos y el despliegue de aplicaciones en la nube. Esto lo considero de especial relevancia para mi carrera profesional dado que en estos momentos se encuentra orientada hacia el desarrollo de aplicaciones con arquitectura de microservicios.
+
 \section{Trabajos futuros}
 \label{sec:trabajos_futuros}
+
+Dadas las conclusiones obtenidas tras la realización de las pruebas, existen una serie de aspectos a mejorar en la aplicación actual.
+\begin{itemize}
+	\item Simplificación de contenidos y mejora estética para hacer más intuitiva la aplicación sin que esto conlleve una pérdida en la información proporcionada.
+\end{itemize}
+\begin{itemize}
+	\item Inclusión de imágenes en los perfiles de los participantes, permitiendo que los participantes tengan asociado un personaje con una imagen y así aumentar el carácter lúdico de la aplicación.
+\end{itemize}
+\begin{itemize}
+	\item Incluir un menú de administración de participantes para el creador en el que pueda eliminar participantes registrados, modificar sus contraseñas, etc.
+\end{itemize}
+\begin{itemize}
+	\item Un apartado para creadores que incluya un registro histórico de las partidas de cada participante incluyendo las URLs de los proyectos evaluados en esas partidas. 
+\end{itemize}
+\begin{itemize}
+	\item Una opción para creadores que permita, sin necesidad de registrar otro correo electrónico, acceder él mismo como participante y de este modo comprobar el menú al que pueden acceder los alumnos.
+\end{itemize}
+\begin{itemize}
+	\item Hacer parametrizable el número de alumnos por equipo y el número de equipos por torneo.
+\end{itemize}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
