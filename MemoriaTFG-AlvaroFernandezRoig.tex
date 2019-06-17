@@ -381,18 +381,18 @@ Se trata de un lenguaje interpretado y orientado a objetos. Es también un lengua
 \section{jQuery} 
 \label{sec:jquery}
 
-jQuery\footnote{\url{https://jquery.com}} es una librería de Javascript en código abierto creada en el año 2006 por John Resig, que simplifica la relación entre el documento HTML y Javascript.
+jQuery\footnote{\url{https://jquery.com}} es una librería de JavaScript en código abierto creada en el año 2006 por John Resig, que simplifica la relación entre el documento HTML y JavaScript.
 
-jQuery simplifica la manipulación del documento HTML, el manejo de eventos, la realización de animaciones, las interacciones Ajax y el desarrollo de código Javascript aplicable a múltiples navegadores \cite{experts:_jquery}.
+jQuery simplifica la manipulación del documento HTML, el manejo de eventos, la realización de animaciones, las interacciones AJAX y el desarrollo de código JavaScript aplicable a múltiples navegadores \cite{experts:_jquery}.
 
-Así mismo, su amplia comunidad hace que jQuery esté siempre depurada y optimizada y que estén disponibles multitud de plugins, facilitando su uso.
+Así mismo, su amplia comunidad hace que jQuery esté siempre depurada y optimizada y que estén disponibles multitud de \emph{plugins}, facilitando su uso.
 
 \section{Bootstrap} 
 \label{sec:bootstrap}
 
-Bootstrap\footnote{\url{https://getbootstrap.com}} es un framework font-end que permite la construcción de páginas web adaptativas. Se trata de un software de código abierto creado en el año 2011 por Mark Otto y Jacob Thornton, empleados de Twitter.
+Bootstrap\footnote{\url{https://getbootstrap.com}} es un framework front-end que permite la construcción de páginas web adaptativas. Se trata de un software de código abierto creado en el año 2011 por Mark Otto y Jacob Thornton, empleados de Twitter.
 
-Bootstrap ha evolucionado desde ser un proyecto enteramente basado en CSS hasta incluir múltiples plugins Javascript e iconos junto con formularios y botones. Presenta una cuadrícula de doce columnas y 940px de ancho \cite{spurlock:_bootstrap}.
+Bootstrap ha evolucionado desde ser un proyecto enteramente basado en CSS hasta incluir múltiples \emph{plugins} JavaScript e iconos junto con formularios y botones. Presenta una cuadrícula de doce columnas y 940px de ancho \cite{spurlock:_bootstrap}.
 
 La creación de páginas web mediante Bootstrap se simplifica al disponer de elementos predefinidos fácilmente incluibles en cualquier página web, tales como menús desplegables, botones, iconos, ventanas emergentes, etc.
 
@@ -404,9 +404,9 @@ La creación de páginas web mediante Bootstrap se simplifica al disponer de eleme
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \cleardoublepage
 \chapter{Diseño e implementación}
-A continuación se detalla el módulo de torneos con Dr. Scratch, incuyendo su arquitectura y su modelo de datos.
+A continuación se detalla el módulo de torneos con Dr. Scratch, incluyendo su arquitectura y su modelo de datos.
 \section{Arquitectura general}
-El módulo de torneos está desarrollado usando el framework Django, cuya arquitectura está basada en el modelo vista controlador MVC. Sin embargo, la terminología utilizada por Django varía con respecto a otros frameworks. En este caso, el controlador se denomina vista y la vista plantilla o template, por lo que en lugar de utilizar el acrónimo MVC se utiliza el acrónimo MTV: model, template, view\footnote{\url{https://docs.djangoproject.com/es/2.1/faq/general/#django-appears-to-be-a-mvc-framework-but-you-call-the-controller-the-view-and-the-view-the-template-how-come-you-don-t-use-the-standard-names}}.
+El módulo de torneos está desarrollado usando el framework Django, cuya arquitectura está basada en el modelo vista controlador MVC. Sin embargo, la terminología utilizada por Django varía con respecto a otros \emph{frameworks}. En este caso, el controlador se denomina vista y la vista plantilla o \emph{template}, por lo que en lugar de utilizar el acrónimo MVC se utiliza el acrónimo MTV: model, template, view\footnote{\url{https://docs.djangoproject.com/es/2.1/faq/general/#django-appears-to-be-a-mvc-framework-but-you-call-the-controller-the-view-and-the-view-the-template-how-come-you-don-t-use-the-standard-names}}.
 
 	\begin{figure}[H]
 		\centering
@@ -418,7 +418,7 @@ El módulo de torneos está desarrollado usando el framework Django, cuya arquitec
 \subsection{Cliente}
 \label{subsec:cliente}
 
-En el lado del cliente se encuentra el navegador web del usuario. El usuario interactuará con la aplicación a través de peticiones HTTP que serán interpretadas en el lado del servidor. La creación de las plantillas con el framework Bootstrap permite que las pantallas sean responsive, es decir, que se ajusten automáticamente a la resolución de pantalla del dispositivo en el que se muestran. De este modo, las diferentes pantallas pueden visualizarse sin problemas tanto desde ordenadores como desde dispositivos móviles o tablets.
+En el lado del cliente se encuentra el navegador web del usuario. El usuario interactuará con la aplicación a través de peticiones HTTP que serán interpretadas en el lado del servidor. La creación de las plantillas con el framework Bootstrap permite que las pantallas sean \emph{responsive}, es decir, que se ajusten automáticamente a la resolución de pantalla del dispositivo en el que se muestran. De este modo, las diferentes pantallas pueden visualizarse sin problemas tanto desde ordenadores como desde dispositivos móviles o \emph{tablets}.
 
 \subsection{Servidor}
 \label{subsec:servidor}
@@ -494,7 +494,7 @@ Se ha definido un mecanismo para notificar al creador a través del envío de corr
 		
 Para el envío de correos con frecuencia una vez al día o una vez a la semana se ha creado un proceso asíncrono que revisa si existen partidas finalizadas y sin validar.
 		
-En la entidad \texttt{Background Task} se almacena un registro identificado con el email del creador y el identificador del torneo para cada ejecución asíncrona. Los registros se actualizan en cada una de las iteraciones del proceso.
+En la entidad \texttt{Background Task} se almacena un registro identificado con el \emph{email} del creador y el identificador del torneo para cada ejecución asíncrona. Los registros se actualizan en cada una de las iteraciones del proceso.
 \end{itemize}
 
 \section{Diseño e implementación por funcionalidad} 
@@ -515,7 +515,7 @@ La página principal de torneos consta de un registro para creadores y de una sec
 
 La aplicación torneos con Dr. Scratch presenta funcionalidades independientes que dependen de si el usuario es un profesor o un alumno. Para ello se ha definido un \textit{login} que identifica si el usuario es un creador o un participante y le redirige a una pantalla principal diferente en cada caso.
 
-En el menú de \textit{login} también se encuentra la funcionalidad de recuperación de contraseña. En el proceso de recuperación de contraseña el usuario deberá introducir su email, que sirve para identificarle en la base de datos y enviarle un correo electrónico con un enlace único en el que se incluirá un token generado y que seguirá el siguiente formato: \texttt{\url{http://torneosdrscratch01.azurewebsites.net/reset_password_tournaments/MQ-54f-0bd3d0c01b4209132767/}}
+En el menú de \textit{login} también se encuentra la funcionalidad de recuperación de contraseña. En el proceso de recuperación de contraseña el usuario deberá introducir su \emph{email}, que sirve para identificarle en la base de datos y enviarle un correo electrónico con un enlace único en el que se incluirá un token generado y que seguirá el siguiente formato: \texttt{\url{http://torneosdrscratch01.azurewebsites.net/reset_password_tournaments/MQ-54f-0bd3d0c01b4209132767/}}
 \\Al pulsar en el enlace el usuario será dirigido a una página en la que podrá establecer una nueva contraseña.
 
 Dado que los participantes pueden ser registrados con nombre de usuario y sin correo electrónico, si el participante no tiene asociada una cuenta de correo electrónico se envía el correo de recuperación de contraseña al creador que le haya registrado.
@@ -758,7 +758,7 @@ Los números de la barra de progreso siguen el siguiente código de colores:
 \item Los retos marcados en \textbf{gris} serán los retos que aún no se encuentran superados por el equipo.
 \end{itemize}
 
-Para crear la barra de progreso se ha utilizado el plugin jQuery Easy Wizard\footnote{\url{https://www.jqueryscript.net/other/Simple-Wizard-Modal-Plugin-with-jQuery-Bootstrap-Easy-Wizard.html}}. En el archivo \texttt{easyWizard.css} se han adaptado los colores para que coincidieran con los tonos usados en las \textit{progress bars} de Dr. Scratch, y el archivo \texttt{easyWizard.js} se ha sustituido por completo utilizando un script con un comportamiento totalmente personalizado.
+Para crear la barra de progreso se ha utilizado el \emph{plugin} jQuery Easy Wizard\footnote{\url{https://www.jqueryscript.net/other/Simple-Wizard-Modal-Plugin-with-jQuery-Bootstrap-Easy-Wizard.html}}. En el archivo \texttt{easyWizard.css} se han adaptado los colores para que coincidieran con los tonos usados en las \textit{progress bars} de Dr. Scratch, y el archivo \texttt{easyWizard.js} se ha sustituido por completo utilizando un script con un comportamiento totalmente personalizado.
 
 En la parte inferior de la barra de progreso se muestra el nombre y la descripción del reto seleccionado y bajo estos, los valores establecidos en el reto en la columna \textit{Valor requerido} y los valores de la partida en la columna \textit{Puntuación más alta}.
 
@@ -934,7 +934,7 @@ Para la base de datos se ha optado por crear un recurso de Servidor de Azure Dat
 
 Para el despliegue de la aplicación se ha creado un recurso App Service gratuito de un núcleo de 1GB de almacenamiento.
 
-Para poder desplegar correctamente la aplicación en el recurso creado, se ha realizado una serie de modificaciones entre las que se incluye la creación de un archivo \texttt{requirements.txt} que permite, mediante la consola de Kudu de Azure, la instalación de los plugins de Python necesarios para el funcionamiento de la aplicación, tales como Hairball o Kurt.
+Para poder desplegar correctamente la aplicación en el recurso creado, se ha realizado una serie de modificaciones entre las que se incluye la creación de un archivo \texttt{requirements.txt} que permite, mediante la consola de Kudu de Azure, la instalación de los \emph{plugins} de Python necesarios para el funcionamiento de la aplicación, tales como Hairball o Kurt.
 
 Así mismo, se incluyen los archivos \texttt{web.config} y \texttt{run\_waitress\_server.py} para la correcta publicación de la aplicación incluyendo sus archivos estáticos \footnote{\url{https://blogs.msdn.microsoft.com/azureossds/2017/09/01/django-app-with-httpplatformhandler-in-azure-app-services-windows}}.
 
